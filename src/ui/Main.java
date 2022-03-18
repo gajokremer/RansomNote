@@ -37,19 +37,35 @@ public class Main {
 		System.out.println("-m: " + m);
 		System.out.println("-n: " + n);
 		
-//		System.out.print("Magazine: ");
-//		String magazineText = sc.nextLine();
-		String magazineText = "Attack on titan";
+		System.out.print("Magazine: ");
+		String magazineText = sc.nextLine();
 		
-//		System.out.print("Note: ");
-//		String noteText = sc.nextLine();
-		String noteText = "attack on titan";
+		System.out.print("Note: ");
+		String noteText = sc.nextLine();
+
+//		String magazineText = "attack on titan";
+//		String noteText = "attack on titan";
 		
 		System.out.println(magazineText);
 		System.out.println(noteText);
 		
 		HashMap<Integer, String> magazine = createMap(m, magazineText);
 		HashMap<Integer, String> note = createMap(n, noteText);
+		
+		if(magazine != null && note != null) {
+			
+			boolean possible = compare(magazine, note);
+			
+			if(possible == true) System.out.println("\n=Yes");
+			
+			if(possible == false) System.out.println("\n=No");
+			
+		} else {
+			
+			System.out.println("-Error: Line size didn't match number");
+			System.out.println("Start over\n\n\n");
+			inputData();
+		}
 	}
 	
 	private HashMap<Integer, String> createMap(int size, String line) {
@@ -78,5 +94,24 @@ public class Main {
 		}
 		
 		return null;
+	}
+	
+	private boolean compare(HashMap<Integer, String> m, HashMap<Integer, String> n) {
+
+		boolean contains = true;
+
+		for(int i = 1; i <= n.size() && contains; i++) {
+			
+//			boolean contains = false;
+			System.out.println("Contains? " + n.get(i) + ": " + m.containsValue(n.get(i)));
+			contains = m.containsValue(n.get(i));
+			
+//			for(int j = 0; j < n.size() && !contains; j++) {
+//				 
+//				contains = m.containsValue(n.get(i));
+//			}
+		}
+		
+		return contains;
 	}
 }
