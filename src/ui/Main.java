@@ -1,117 +1,59 @@
 package ui;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
 	
 	private Scanner sc =  new Scanner(System.in);
+	private OriginalVersion ov;
+	private MyVersion mv;
 	
 	public Main() {
 
 		sc = new Scanner(System.in);
+		ov = new OriginalVersion();
+		mv = new MyVersion();
 	}	
 	
 	public static void main(String[] args) {
 		
 		Main main = new Main();
+
+		main.menu();
 		
 //		Scanner sc =  new Scanner(System.in);
 		
-		main.inputData();
+//		main.inputData();
 	}
 
-	private void inputData() {
-		
-//		HashMap<Integer, String> magazine = new HashMap<>();
-//		HashMap<Integer, String> note = new HashMap<>();
-		
-		System.out.print("Number or words: ");
-		String numWords = sc.nextLine();
-		
-		String[] sizes = numWords.split(" ");
-		
-		int m = Integer.parseInt(sizes[0]);
-		int n = Integer.parseInt(sizes[1]);
-		
-		System.out.println("-m: " + m);
-		System.out.println("-n: " + n);
-		
-		System.out.print("Magazine: ");
-		String magazineText = sc.nextLine();
-		
-		System.out.print("Note: ");
-		String noteText = sc.nextLine();
+	private void menu() {
 
-//		String magazineText = "attack on titan";
-//		String noteText = "attack on titan";
+		System.out.println("========== MENU ==========" + 
+				"\n(1) for Original HashMap Version" + 
+				"\n(2) for MyHashMap Version" + 
+				"\n(0) to exit");
 		
-		System.out.println(magazineText);
-		System.out.println(noteText);
+		int option = sc.nextInt();
 		
-		HashMap<Integer, String> magazine = createMap(m, magazineText);
-		HashMap<Integer, String> note = createMap(n, noteText);
+		switch (option) {
 		
-		if(magazine != null && note != null) {
+		default:
+			menu();
+			break;
 			
-			boolean possible = compare(magazine, note);
+		case 1:
+			ov.inputData();
+			menu();
+			break;
 			
-			if(possible == true) System.out.println("\n=Yes");
+		case 2:
+			mv.inputData();
+			menu();
+			break;
 			
-			if(possible == false) System.out.println("\n=No");
-			
-		} else {
-			
-			System.out.println("-Error: Line size didn't match number");
-			System.out.println("Start over\n\n\n");
-			inputData();
+		case 0:
+			System.out.println("\n-Exit");
+			break;
 		}
-	}
-	
-	private HashMap<Integer, String> createMap(int size, String line) {
-		
-		String[] words = line.split(" ");
-		
-//		for(int i = 0; i < words.length; i++) {
-//			
-//			System.out.println(i + ") " + words[i]);
-//		}
-		
-		System.out.println(words.length == size);
-		
-		if(words.length == size) {
-			
-			HashMap<Integer, String> map = new HashMap<>();
-			
-			for(int i = 0; i < size; i++) {
-				
-				map.put(i + 1, words[i]);
-			}
-			
-			System.out.println("Map: " + map);
-			
-			return map;
-		}
-		
-		return null;
-	}
-	
-	private boolean compare(HashMap<Integer, String> m, HashMap<Integer, String> n) {
-
-		boolean contains = true;
-
-		for(int i = 1; i <= n.size() && contains; i++) {
-			
-//			boolean contains = false;
-			System.out.println("Contains? " + n.get(i) + ": " + m.containsValue(n.get(i)));
-			contains = m.containsValue(n.get(i));
-			
-//			for(int j = 0; j < n.size() && !contains; j++) {
-//				 
-//				contains = m.containsValue(n.get(i));
-//			}
-		}
-		
-		return contains;
 	}
 }
