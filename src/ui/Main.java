@@ -29,8 +29,8 @@ public class Main {
 	private void menu() {
 
 		System.out.println("========== MENU ==========" + 
-				"\n(1) for Original HashMap Version" + 
-				"\n(2) for MyHashMap Version" + 
+				"\n(1) for Original Hashtable Version" + 
+				"\n(2) for MyHashtable Version" + 
 				"\n(0) to exit");
 		
 		int option = sc.nextInt();

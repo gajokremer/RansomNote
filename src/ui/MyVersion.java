@@ -1,7 +1,7 @@
 package ui;
 
 import java.util.Scanner;
-import model.MyHashMap;
+import model.MyHashtable;
 
 public class MyVersion {
 
@@ -9,10 +9,10 @@ public class MyVersion {
 
 	public void inputData() {
 		
-		System.out.println("\n\n========== MyHashMap Version ==========\n");
+		System.out.println("\n\n========== MyHashtable Version ==========\n");
 
-		//		MyHashMap<Integer, String> magazine = new MyHashMap<>();
-		//		MyHashMap<Integer, String> note = new MyHashMap<>();
+		//		MyHashtable<Integer, String> magazine = new MyHashtable<>();
+		//		MyHashtable<Integer, String> note = new MyHashtable<>();
 
 		//		System.out.println("		(Magazine, Note)");
 		System.out.print("Number of words: ");
@@ -38,8 +38,8 @@ public class MyVersion {
 		//		System.out.println(magazineText);
 		//		System.out.println(noteText);
 
-		MyHashMap<Integer, String> magazine = createMap(m, magazineText);
-		MyHashMap<Integer, String> note = createMap(n, noteText);
+		MyHashtable<Integer, String> magazine = create(m, magazineText);
+		MyHashtable<Integer, String> note = create(n, noteText);
 
 		if(magazine != null && note != null) {
 
@@ -57,7 +57,7 @@ public class MyVersion {
 		}
 	}
 
-	private MyHashMap<Integer, String> createMap(int size, String line) {
+	private MyHashtable<Integer, String> create(int size, String line) {
 
 		String[] words = line.split(" ");
 
@@ -70,30 +70,30 @@ public class MyVersion {
 
 		if(words.length == size) {
 
-			MyHashMap<Integer, String> map = new MyHashMap<>();
+			MyHashtable<Integer, String> table = new MyHashtable<>();
 
 			for(int i = 0; i < size; i++) {
 
-				map.put(i + 1, words[i]);
+				table.put(i + 1, words[i]);
 			}
 
-			//			System.out.println("Map: " + map);
+			//			System.out.println("Table: " + table);
 
-			return map;
+			return table;
 		}
 
 		return null;
 	}
 
-	private boolean compare(MyHashMap<Integer, String> m, MyHashMap<Integer, String> n) {
+	private boolean compare(MyHashtable<Integer, String> m, MyHashtable<Integer, String> n) {
 
 		boolean contains = true;
 
 		for(int i = 1; i <= n.size() && contains; i++) {
 
 			//			boolean contains = false;
-			System.out.println("Contains? " + n.get(i) + ": " + m.containsValue(n.get(i)));
 			contains = m.containsValue(n.get(i));
+			System.out.println("Contains? " + n.get(i) + ": " + contains);
 
 			//			for(int j = 0; j < n.size() && !contains; j++) {
 			//				 

@@ -1,10 +1,10 @@
 package model;
 
-public class MyHashMap <K, V> {
+public class MyHashtable <K, V> {
 	
 	private Node<K, V> first;
 	
-	public MyHashMap() {
+	public MyHashtable() {
 		
 		first = null;
 	}
@@ -65,11 +65,11 @@ public class MyHashMap <K, V> {
 			
 		} else {
 			
-			return findValue(key, first);
+			return findValueByKey(key, first);
 		}
 	}
 	
-	private V findValue(K key, Node<K, V> current) {
+	private V findValueByKey(K key, Node<K, V> current) {
 
 		if(current.getKey() == key) {
 			
@@ -77,43 +77,41 @@ public class MyHashMap <K, V> {
 			
 		} else {
 			
-			return findValue(key, current.getNext());
+			return findValueByKey(key, current.getNext());
 		}
 	}
 	
 	public boolean containsValue(V value) {
 		
-		if(first.getValue() == value) {
+		System.out.println("First: " + first.getValue());
+		System.out.println("Value: " + value);
+		
+		if(first.getValue().equals(value)) {
 			
 			return true;
 			
 		} else {
 			
-			return findIfValueExists(value, first);
+			return findIfValueExists(value, first.getNext());
 		}
 	}
 	
 	private boolean findIfValueExists(V value, Node<K, V> current) {
 		
-		System.out.println("Current: " + current);
-		
-		if(current.getValue() == value) {
+		if(current != null) {
 			
-			System.out.println(1);
-			
-			return true;
-			
-		} else if(current.getValue() != value && current.getNext() == null) {
+			if(current.getValue().equals(value)) {
 
-			System.out.println(2);
-			
-			return false;
+				return true;
+
+			} else {
+
+				return findIfValueExists(value, current.getNext());
+			}
 			
 		} else {
 			
-			System.out.println(3);
-
-			return findIfValueExists(value, current.getNext());
+			return false;
 		}
 	}
 
